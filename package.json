@@ -27,7 +27,7 @@
     "bootstrap-select": "^1.12.4",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
-    "npm": "^5.8.0",
+    "npm": "^6.13.4",
     "rxjs": "^5.0.1",
     "sweetalert2": "^7.8.6",
     "ts-helpers": "^1.1.1",
