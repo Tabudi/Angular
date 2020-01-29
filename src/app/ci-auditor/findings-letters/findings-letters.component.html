@@ -1,0 +1,102 @@
+<div class="panel">
+  <div class='panel-primary' style="width: 80vw;">
+    <h2 class="panel-heading">{{windowLabel}}</h2>
+    <div class='panel-body'>
+      <div class='row'>
+        <div class='col-md-2'>Filter by:</div>
+        <div class='col-md-4'>
+          <input type='text' class="form-control searchbar" />
+        </div>
+      </div>
+
+      <div class='table-responsive' style="margin-top: 10px">
+        <div class='table'>
+          <div class="listBorder">
+            <div class="row">
+              <div class="col-lg-2">
+                <label class="boldtext">Audit Status</label>
+              </div>
+              <div class="col-lg-2">
+                <label class="boldtext">Risk Assement Report</label>
+              </div>
+              <div class="col-lg-2">
+                <label class="boldtext">Is Existing Audit</label>
+              </div>
+              <div class="col-lg-1">
+                <label class="boldtext">Is Trader New</label>
+              </div>
+              <div class="col-lg-2">
+                <label class="boldtext">No. Of Documents</label>
+              </div>
+              <div class="col-lg-1">
+                <label class="boldtext">StartDate</label>
+              </div>
+
+              <div class="col-lg-1">
+                <label class="boldtext">DateCreated</label>
+              </div>
+
+              <div class="col-lg-1">
+              </div>
+            </div>
+            <div *ngFor='let auditItem of auditItems' class="row tableoutline">
+              <div class="col-lg-2">
+                <div class="tablebox">
+                  <label>
+                    {{auditItem.AuditTemplate?.Status}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="tablebox">
+                  <label>
+                    {{auditItem.AuditTemplate?.RiskAssementReport}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="tablebox">
+                  <label>
+                    {{auditItem.AuditTemplate?.IsExistingAuditOrInvestigation}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-1">
+                <div class="tablebox">
+                  <label>{{auditItem.AuditTemplate?.IsTraderNewExporterImporter}}</label>
+                </div>
+              </div>
+
+              <div class="col-lg-2">
+                <div class="tablebox">
+                  <label>
+                    {{auditItem.AuditDocuments?.length== null?0:auditItem.AuditDocuments?.length}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-1">
+                <div class="tablebox">
+                  <label>
+                    {{auditItem.AuditTemplate?.StartDate | date}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-1">
+                <div class="tablebox">
+                  <label>
+                    {{auditItem.AuditTemplate?.DateCreated | date}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-1">
+                <div class="buttonSpacing">
+                  <button class='btn btn-primary' (click)='executeFindings(auditItem)'>Generate Letter</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

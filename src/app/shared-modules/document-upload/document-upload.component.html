@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div>
+            <input type="file" id="fileloader" multiple="multiple" (change)="uploadFile($event)" />
+            <br/>
+        </div>
+        <h3>Documents</h3>
+        <p>Number Of Documents: {{documentItems.length }}</p>
+
+        <div class="listBorderTop">
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-lg-6 col-md-6">
+                    <label class="boldtext">Name</label>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <label class="boldtext">Size</label>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <label class="boldtext">Remove</label>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <label class="boldtext">View Doc</label>
+                </div>
+            </div>
+        </div>
+        <div class="listBorderBottom">                
+            <div *ngFor="let documentItem of documentItems; let i = index" class="row tableoutline">
+                <div class="col-lg-6 col-md-6">
+                    <div class="tablebox">
+                        <strong>{{documentItem.FileName}}</strong>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="tablebox">
+                        {{documentItem.FileSize/1024/1024 | number:'.2' }} MB
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="tablebox">
+                        <button type="button" class="btn btn-danger btn-xs" (click)="removeDocument(i)">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="tablebox">
+                        <button type="button" id="ViewButton" class="btn btn-primary btn-xs" (click)="viewDocument(i)">
+                            <span class="glyphicon glyphicon-file"></span> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>      
+    </div>
+</div>

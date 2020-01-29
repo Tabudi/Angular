@@ -1,0 +1,111 @@
+<div class="panel">
+  <div class='panel-primary'>
+    <h2 class="panel-heading">CI Allocation/ RE Allocation Inventory</h2>
+    <div class='panel-body'>
+      <div class='row' *ngIf="viewAllocateButton == true">
+        <label class='control-label col-md-2'>Get Next To Allocate:</label>
+        <div class='col-md-4'>
+          <button tooltip="Allocate First" [disabled]="gridItems.length > 0" class='btn btn-primary' (click)="getNextCaseToAllocate()">Get Next</button>
+        </div>
+      </div>
+      <br/>
+      <div class="row" *ngIf="viewAllocateButton == true">
+        <label class="control-label col-sm-2">Get Next To Allocate By Region:</label>
+        <div class='col-md-1'>
+          <button class='btn btn-primary' (click)="getCaseByRegion()" [disabled]="region.value == ''">Get Next</button>
+        </div>
+        <div class="col-sm-2">
+          <select class="form-control" #region (change)="getValue(region.value)" [disabled]="gridItems.length > 0">
+            <option></option>
+            <option *ngFor="let regionItem of regionItems" [value]="regionItem.RegionId">{{regionItem.RegionName}}</option>
+          </select>
+        </div>
+      </div>
+      <br/>
+
+      <!-- <div class="row">
+        <label class="control-label col-sm-2">Search by Case or Custom Code:</label>
+        <div class='col-md-1'>
+          <button class='btn btn-primary' [disabled]="track.value == ''" (click)="onTrackButtonClick()">Track Assign</button>
+        </div>
+        <div class="col-sm-2">
+          <input class="form-control" #track type="text" [disabled]="gridItems.length > 0" (blur)="getTextValue(track.value)" />
+        </div>
+      </div> -->
+      <br/>
+      <!-- <div class="row" *ngIf="viewAllocateButton == false">
+        <label class="control-label col-sm-2">Get All Allocated Case:</label>
+        <div class='col-md-1'>
+          <button class='btn btn-primary'   (click)="getAllocated()" >Get Allocated</button>
+        </div>
+      </div>
+      <br/> -->
+      <div class='table-responsive' *ngIf="gridItems.length > 0">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th *ngIf="viewAllocateButton != false">Case Ref Number:</th>
+              <th *ngIf="viewAllocateButton == false">Case Ref Number:</th>
+              <th *ngIf="viewAllocateButton != false">Case Status:</th>
+              <th *ngIf="viewAllocateButton != false">Customs Excise Code:</th>
+              <th *ngIf="viewAllocateButton == false">Customs Excise Code:</th>
+              <th *ngIf="viewAllocateButton != false">Company registered number:</th>
+              <th *ngIf="viewAllocateButton == false">Company registered number:</th>
+              <th *ngIf="viewAllocateButton != false">Trading Name:</th>
+              <th *ngIf="viewAllocateButton != false">Income Tax:</th>
+              <th *ngIf="viewAllocateButton == false">Allocate By:</th>
+              <th *ngIf="viewAllocateButton == false">Allocated To:</th>
+              <th *ngIf="viewAllocateButton == false">Updated By:</th>
+              <th>DateCreated:</th>
+              <th>Re / Allocate</th>
+              <th>View Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let gridItem of gridItems;let i = index'>
+              <td *ngIf="viewAllocateButton == false">{{gridItem?.VddlDetails.CaseRefNo}}</td>
+              <td *ngIf="viewAllocateButton != false">ACTIVE</td>
+              <td *ngIf="viewAllocateButton != false">{{gridItem.VddlDetails?.CustomsExciseCode}}</td>
+              <td *ngIf="viewAllocateButton == false">{{gridItem.VddlDetails?.CompanyRegisteredNumber}}</td>
+              <td *ngIf="viewAllocateButton == false">{{gridItem.VddlDetails.CompanyRegisteredNumber}}</td>
+              <td *ngIf="viewAllocateButton != false">{{gridItem.VddlDetails?.CompanyRegisteredNumber}}</td>
+              <td *ngIf="viewAllocateButton != false">{{gridItem.VddlDetails?.TradingName}}</td>
+              <td *ngIf="viewAllocateButton != false">{{gridItem.VddlDetails?.IncomeTax}}</td>
+              <td *ngIf="viewAllocateButton != false">{{gridItem.VddlDetails?.VATNumber}}</td>
+              <td *ngIf="viewAllocateButton != false">{{gridItem.VddlDetails?.DateCreated}}</td>
+              <td *ngIf="viewAllocateButton == false">{{gridItem.VddlAllocation?.AllocatorSid}}</td>
+              <td *ngIf="viewAllocateButton == false">{{gridItem.VddlAllocation?.AllocateeSid}}</td>
+              <td *ngIf="viewAllocateButton == false">{{gridItem.VddlAllocation?.UpdatedBy}}</td>
+              <td *ngIf="viewAllocateButton == false">{{gridItem.VddlDetails?.DateCreated | date}}</td>
+              <td>
+                <button class='btn btn-primary' (click)="allocaTeReallocateButton(gridItem)">Re/Allocate</button>
+              </td>
+              <td>
+                <button class='btn btn-primary' (click)="onVddlView(gridItem)">View Details</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="showAllocateReAllocate == true">
+    <div class="form-group col-sm-12">
+      <label class="control-label col-sm-2">Select Team Member:</label>
+      <div class="col-sm-2">
+        <select class="form-control" #teamMemebr (change)="getTeamMemberValue(teamMemebr.value)">
+          <option></option>
+          <option *ngFor="let usersItem of usersItems" [value]="usersItem.SID">{{usersItem.FirstName + usersItem.LastName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <button *ngIf="whichRoleActive=='Allocate'" class='btn btn-primary' (click)="allocateReallocate()" [disabled]="teamMemebr.value == ''">Allocate</button>
+      <button *ngIf="whichRoleActive!='Allocate'" class='btn btn-primary' (click)="allocateReallocate()" [disabled]="teamMemebr.selected" [disabled]="teamMemebr.value == ''">Re-Allocate</button>
+    </div>
+   
+  </div>
+  <div *ngIf="whichRoleActive=='ReAllocate'">
+    <app-allocate></app-allocate>
+  </div>
+</div>

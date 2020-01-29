@@ -1,0 +1,23 @@
+.mainHeader{
+    width: 97%;
+    position: fixed;
+    margin-top: 0px;
+}
+
+.labels{
+    float: right;
+}
+
+.labels h1, .labels h5{
+        color: #337ab7;
+}
+
+.mainHeader .img-responsive {
+        margin-top: -47px !important;
+}
+
+.mainHeader h5 {
+    margin-top: -7px;
+    font-style: italic;
+    font-size: 16px !important;
+}

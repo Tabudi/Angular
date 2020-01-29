@@ -1,0 +1,117 @@
+<div class="panel">
+    <div class='panel-primary'>
+        <h2 class="panel-heading">RA Approval</h2>
+        <div class='panel-body'>
+            <div class='row'>
+                <div class='col-md-2'>Filter by:</div>
+                <div class='col-md-4'>
+                    <input type='text' class="form-control" />
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6'>
+                    <h3>Filtered</h3>
+                </div>
+            </div>
+            <div class='table-responsive' style="margin-top: 10px">
+                <div class='table'> 
+                    <div class="listBorder">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label class="boldtext">Registered Name:</label>
+                            </div>
+                            <div class="col-lg-1">
+                                <label class="boldtext">Trading Name:</label>
+                            </div>
+                            <div class="col-lg-2">
+                                <label class="boldtext">Company registered number:</label>
+                            </div>
+                            <div class="col-lg-1">
+                                <label class="boldtext">Trading Name:</label>
+                            </div>
+                            <div class="col-lg-1">
+                                <label class="boldtext">Postal Address:</label>
+                            </div>
+                            <div class="col-lg-1">
+                                <label class="boldtext">Physical Address:</label>
+                            </div>
+                            <div class="col-lg-1">
+                                <label class="boldtext">Email Address:</label>
+                            </div>
+                        </div>
+                        <div *ngFor='let radetail of filteredsarDetails' class="row tableoutline">
+                            <div class="col-lg-2">
+                                <div class="tablebox">
+                                    <label>
+                                         {{radetail.RegistrationParticulars.CustomsCode}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="tablebox">
+                                    <label>
+                                     {{radetail.RegistrationParticulars.RegisteredName}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="tablebox">
+                                    <label>
+                                         {{radetail.RegistrationParticulars.TradingName}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="tablebox">
+                                    <label>
+                                     {{radetail.RegistrationParticulars.PostalAddress}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="tablebox">
+                                    <label>
+                                     {{radetail.RegistrationParticulars.PhysicalAddress}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="tablebox">
+                                    <label>
+                                     {{radetail.RegistrationParticulars.EmailAddress}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="tablebox">
+                                    <label>
+                                     {{radetail.RegistrationParticulars.TelNumber}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="tablebox">
+                                    <label>
+                                     {{radetail.RegistrationParticulars.FaxNumber}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="tablebox">
+                                    <label>
+                                         {{radetail.CustomsRASParticulars.Address}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="btncolumn">
+                                    <button class='btn btn-primary' (click)='onRAEdit(radetail)'>Approval</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

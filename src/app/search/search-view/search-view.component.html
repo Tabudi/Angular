@@ -1,0 +1,158 @@
+<div class="row ">
+    <div class=" panel-primary">
+        <h2 class="panel-heading">{{viewTitle}}</h2>
+    </div>
+    <div class="panel col-md-11 col-lg-11">
+        <div class="row">
+            <div class='panel-primary'>
+                <div class='panelheader'>
+                    Search Criteria
+                </div>
+                <div class="panelcontainercriteria">
+                    <div class="form-group col-sm-12">
+                        <div class="col-md-2">Case Ref Number:</div>
+                        <div class="col-md-4">
+                            <input  class="form-control" type="text" id="refNumber" [(ngModel)]="refNumber" >
+                        </div>
+                        <div class="col-md-2">Customs Excise Code:</div>
+                        <div class="col-md-4">
+                            <input  class="form-control" type="text" id="exciseCode"  [(ngModel)]="exciseCode" >
+                        </div>
+                    </div>     
+                    <div class="form-group col-sm-12">
+                        <div class="col-md-2">Company Registered Number:</div>
+                        <div class="col-md-4">
+                            <input   class="form-control" type="text" id="companyNumber" [(ngModel)] ="companyNumber">
+                        </div>
+                        <div class="col-md-2">Trading Name:</div>
+                        <div class="col-md-4">
+                            <input   class="form-control" type="text" id="tradingName" [(ngModel)] ="tradingName">
+                        </div>
+                    </div>     
+                    <div class="form-group col-sm-12">
+                        <div class="col-md-2">Start Date:</div>
+                        <div class="col-md-4">
+                            <input  class="form-control" type="date" id="startDate" [(ngModel)] ="startDate">
+                        </div>
+                        <div class="col-md-2">End Date:</div>
+                        <div class="col-md-4">
+                            <input  class="form-control" type="date" id="endDate" [(ngModel)] ="endDate">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="col-md-2">Sid:</div>
+                        <div class="col-md-4">
+                            <input  class="form-control" type="text" id="sid" [(ngModel)] ="sid">
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                            <div class="col-md-2">Search By</div>
+                            <div class="col-md-4">
+                                VDDL <input type="radio" [(ngModel)]="searchVal" name="searchtype" value="VDD" checked>
+                                SAR <input type="radio" [(ngModel)]="searchVal" name="searchtype" value="SAR">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <button class='btn btn-primary' (click)="onSearch()">Search</button>                            
+                            </div>
+                        </div>
+                </div>
+            <div class='panel-primary'>
+                <div class='panelheader'>Search Results</div>
+                <div class="panelcontainerresults">
+                    <div class='form-group col-sm-12'>
+                        <div class='col-md-2'>Filter by:</div>
+                        <div class='col-md-4'>
+                            <input type='text' class="form-control" [(ngModel)]='listFilter' />
+                        </div>
+                    </div>              
+                    <div class="form-group col-sm-12">
+                        <!-- Table Header -->
+                        <div class="listBorderTop">
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Case Ref Number:</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Case Status:</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Customs Excise Code:</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Company registered number:</label>
+                            </div>   
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Trading Name:</label>
+                            </div>   
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Income Tax:</label>
+                            </div>   
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">VAT Number:</label>
+                            </div>   
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Date Created:</label>
+                            </div>                              
+                            <div class="col-lg-1 col-md-1">
+                                <label class="boldtext">Action:</label>
+                            </div>  
+                        </div>
+                        <!-- Table Rows--> 
+                        <div class="listBorderBottom">
+                            <div *ngFor="let search of filteredSearchResults; let i = index" class="row tableoutline">
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">
+                                        {{search.CaseRefNo}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1">
+                                        <div class="tablebox">
+                                            {{search.Status}}
+                                        </div>
+                                    </div>
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">
+                                        {{search.CustomsExciseCode}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">
+                                        {{search.CompanyRegisteredNumber}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">
+                                        {{search.TradingName}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">
+                                        {{search.IncomeTax}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">
+                                        {{search.VATNumber}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">
+                                        {{search.DateCreated | date}}                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1">
+                                    <div class="tablebox">                                            
+                                        <button class='btn btn-primary' (click)='onLoadDetails(search)'>Edit</button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  <!-- End Table -->
+                </div>  <!-- end panelcontainerresult -->
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

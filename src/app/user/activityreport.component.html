@@ -1,0 +1,882 @@
+<div class="panel">
+    <div class=" panel-primary">
+        <h2 class="panel-heading">{{viewTitle}}</h2>
+    </div>
+
+    <div class="col-md-8 col-lg-8">
+        <!-- <div class="panelprimary" style="margin-top:-10px !important; margin-right:0px !important"> -->
+        <!-- <div class="panelcontainer"> -->
+        <form novalidate #sarform="ngForm">
+            <div class="panelcontainer" style="margin-top:30px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Case Details
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-3">Case Status:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled class="form-control" id='caseStatus' type="text" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-3">Reference Number:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled class="form-control" id="refNo" type="text" [(ngModel)]="sarData.CaseDetails.ReferenceNumber" name="ReferenceNumber" #referenceNumber="ngModel" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-3">Traveller/Individual:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" [(ngModel)]="sarData.CaseDetails.TravellerIndividualId" name="travellerIndividualId" #travellerIndividualId="ngModel">
+                                                    <option></option>
+                                                    <option *ngFor="let traveller of travellerList" [value]="traveller.TravellerIndividualId">{{traveller.Description}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-3">Number of travellers/Individuals:</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="noTravellerIndividual" type="number" [(ngModel)]="sarData.CaseDetails.NumTravellersIndividuals" name="NumTravellersIndividuals" #numTravellersIndividuals="ngModel" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-3">Company/trader/importer/exporters:</label>
+                                            <div class="col-sm-4">
+                                                <!-- <input class="form-control" id="companTtraderImporterExporters" type="text" /> -->
+                                                <select class="form-control" [(ngModel)]="sarData.CaseDetails.EntityTypeId" name="EntityTpyeId" #entityTpyeId="ngModel">
+                                                    <option></option>
+                                                    <option *ngFor="let companies of companiesList" [value]="companies.EntityTypeId">{{companies.Description}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-3">Number of Companies/trader/ importer/exporters:</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="companTtraderImporterExporters" type="number" [(ngModel)]="sarData.CaseDetails.NumEntityTypes" name="NumEntityTypes" #numEntityTypes="ngModel" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Tbd Ref Details
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body divScroll">
+                                        <form novalidate #refDetails="ngForm">
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-2">Customs/Excise code: *</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="customscode" type="text" [ngModel]="refDetailsData.CustomsExciseCode" name="CustomsExciseCode" #customsExciseCode="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-2">Company Number: *</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="companyNo" type="text" [ngModel]="refDetailsData.CompanyNumber" name="CompanyNumber" #companyNumber="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-2">Income tax: *</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="noTravellerIndividual" type="number" [ngModel]="refDetailsData.IncomeTax" name="IncomeTax" #incomeTax="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-2">Vat: *</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="companTtraderImporterExporters" type="text" [ngModel]="refDetailsData.VAT" name="VAT" #vAT="ngModel" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="col-sm-10">
+                                            <button class='btn btn-primary' style="float: right!important" (click)="onDoneEditDetails(refDetailsData,refDetails)">Done Edit</button>
+                                            <button class='btn btn-primary' style="float: right!important" (click)="addRefDetails(refDetails)">Add Ref Details</button>
+                                        </div>
+
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-2">Filter Data by:</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" id="companTtraderImporterExporters" type="text" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm-10">
+                                            <div class='table-responsive'>
+                                                <table class='table'>
+                                                    <thead class="panel-title">
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Customs/Excise code:</th>
+                                                            <th>Company Number:</th>
+                                                            <th>Income Tax:</th>
+                                                            <th>VAT:</th>
+                                                            <th>Edit</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of items;let i = index">
+                                                            <td>{{i}}</td>
+                                                            <td>{{item.CustomsExciseCode}}</td>
+                                                            <td>{{item.CompanyNumber}}</td>
+                                                            <td>{{item.IncomeTax}}</td>
+                                                            <td>{{item.VAT}}</td>
+                                                            <td>
+                                                                <button class='btn btn-primary' (click)='onRefDetailsEdit(item, refDetails, i)'>Edit</button>
+                                                            </td>
+                                                            <td>
+                                                                <button class='btn btn-danger' (click)='onRefDetailsRemove(item)'>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- pager -->
+                                            <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <label style="margin-top:10px">Page {{currentIndex}}/{{pageNumber}}</label>
+                                                </div>
+                                                <div class="btn-group pull-right">
+                                                    <ul class="pagination">
+                                                        <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}">
+                                                            <a (click)="prevPage()">Prev</a>
+                                                        </li>
+                                                        <li *ngFor="let page of pagesIndex" [ngClass]="{'active': (currentIndex == page)}">
+                                                            <a (click)="setPage(page)">{{page}}</a>
+                                                        </li>
+                                                        <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}">
+                                                            <a (click)="nextPage()">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingFour">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            Entity Type Details
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                    <div class="panel-body divScroll">
+                                        <form novalidate #entityDetails="ngForm">
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Registration Name:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="regName" type="text" [ngModel]="entityDetailsData.RegistrationName" name="RegistrationName" #registrationName="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Trading Name:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="tradingname" type="text" [ngModel]="entityDetailsData.TradingName" name="TradingName" #tradingName="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Company Number:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="comNumber" type="number" [ngModel]="entityDetailsData.CompanyNumber" name="CompanyNumber" #companyNumber="ngModel" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="col-sm-10">
+                                            <button class='btn btn-primary' style="float: right!important" (click)="doneEntityDetailsEdit(entityDetailsData,entityDetails)">Done Edit</button>
+                                            <button class='btn btn-primary' style="float: right!important" (click)="addEntityDetails(entityDetailsData)">Add Entity Details</button>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-2">Filter Data by:</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="companTtraderImporterExporters" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-10">
+                                            <div class='table-responsive'>
+                                                <table class='table'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Registration Name:</th>
+                                                            <th>Trading Name:</th>
+                                                            <th>Company Number:</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let entItem of entItems;let i = index">
+                                                            <td>{{i}}</td>
+                                                            <td>{{entItems[i]?.RegistrationName}}</td>
+                                                            <td>{{entItems[i]?.TradingName}}</td>
+                                                            <td>{{entItems[i]?.CompanyNumber}}</td>
+                                                            <td>
+                                                                <button class='btn btn-primary' (click)='entityDetailsEdit(entItem, entityDetails ,i)'>Edit</button>
+                                                            </td>
+                                                            <td>
+                                                                <button class='btn btn-danger' (click)='onRefDetailsRemove(entityDetail)'>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <label style="margin-top:10px">Page {{entCurrentIndex}}/{{entPageNumber}}</label>
+                                                </div>
+                                                <div class="btn-group pull-right">
+                                                    <ul class="pagination">
+                                                        <li [ngClass]="{'disabled': (entCurrentIndex == 1 || entPageNumber == 0)}">
+                                                            <a (click)="prevPageEnty()">Prev</a>
+                                                        </li>
+                                                        <li *ngFor="let page of entPagesIndex" [ngClass]="{'active': (entCurrentIndex == page)}">
+                                                            <a (click)="setPageEnty(page)">{{page}}</a>
+                                                        </li>
+                                                        <li [ngClass]="{'disabled': (entCurrentIndex == entPageNumber || entPageNumber == 0)}">
+                                                            <a (click)="nextPageEnty()">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Reported Person Details
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body divScroll">
+                                        <form novalidate #reportedPerson="ngForm">
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Surname:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="surname" type="text" [ngModel]="reportedPersonData.Surname" name="Surname" #surname="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Initials:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="initials" type="text" [ngModel]="reportedPersonData.Initials" name="Initials" #initials="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">First Two Names:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="firsttwonames" type="text" [ngModel]="reportedPersonData.FirstNames" name="FirstNames" #firstNames="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Date of Birth:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="dob" type="text" [ngModel]="reportedPersonData.DateOfBirth" name="DateOfBirth" #dateOfBirth="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">ID Number:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="idNo" type="text" [ngModel]="reportedPersonData.IDNumber" name="IDNumber" #iDNumber="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Passport Number:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="passNumber" type="text" [ngModel]="reportedPersonData.PassportNumber" name="PassportNumber" #passportNumber="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Passport Country (eg. SA=ZAF):</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="passCountry" type="text" [(ngModel)]="reportedPersonData.PassportCountry" name="PassportCountry" #passportCountry="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Province:</label>
+                                                <div class="col-sm-2">
+                                                    <!-- <input class="form-control" id="province" type="text"  [(ngModel)]="reportedPersonData.ProvinceId"  name="ProvinceId" #provinceId="ngModel" />-->
+                                                    <select class="form-control" [(ngModel)]="reportedPersonData.ProvinceId" name="ProvinceId" #provinceId="ngModel">
+                                                        <option></option>
+                                                        <option *ngFor="let provinces of provincesList" [value]="provinces.ProvinceId">{{provinces.Description}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="col-sm-10">
+                                            <button class='btn btn-primary' style="float: right!important" (click)="doneReportedPersonDetailsEdit(reportedPersonData,reportedPerson)">Done Edit</button>
+                                            <button class='btn btn-primary' style="float: right!important" (click)="addReportedPersonDetails(reportedPerson)">Add Person Details</button>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-2">Filter Data by:</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="companTtraderImporterExporters" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-10">
+                                            <div class='table-responsive'>
+                                                <table class='table'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Surname:</th>
+                                                            <th>First Two Names:</th>
+                                                            <th>Date of Birth:</th>
+                                                            <th>ID Number:</th>
+                                                            <th>Edit</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let repItem of repItems;let i = index">
+                                                            <td>{{i}}</td>
+                                                            <td>{{repItems[i]?.Surname}}</td>
+                                                            <td>{{repItems[i]?.FirstNames}}</td>
+                                                            <td>{{repItems[i]?.DateOfBirth}}</td>
+                                                            <td>{{repItems[i]?.IDNumber}}</td>
+                                                            <td>
+                                                                <button class='btn btn-primary' (click)='reportedPersonDetailsEdit(repItem, reportedPerson,i)'>Edit</button>
+                                                            </td>
+                                                            <td>
+                                                                <button class='btn btn-danger' (click)='reportedPersonDetailsEdit(repItem)'>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <label style="margin-top:10px">Page {{repCurrentIndex}}/{{repPageNumber}}</label>
+                                                </div>
+                                                <div class="btn-group pull-right">
+                                                    <ul class="pagination">
+                                                        <li [ngClass]="{'disabled': (repCurrentIndex == 1 || repPageNumber == 0)}">
+                                                            <a (click)="prevPagePer()">Prev</a>
+                                                        </li>
+                                                        <li *ngFor="let page of repPagesIndex" [ngClass]="{'active': (repCurrentIndex == page)}">
+                                                            <a (click)="setPagePer(page)">{{page}}</a>
+                                                        </li>
+                                                        <li [ngClass]="{'disabled': (repCurrentIndex == repPageNumber || repPageNumber == 0)}">
+                                                            <a (click)="nextPagePer()">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-10">
+                                            <div class='table-responsive'>
+                                                <table class='table'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Surname:</th>
+                                                            <th>First Two Names:</th>
+                                                            <th>Date of Birth:</th>
+                                                            <th>ID Number:</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let ReportedPersonDetail of sarData.ReportedPersonDetails;let i = index">
+                                                            <td>{{sarData.ReportedPersonDetails[i].Surname}}</td>
+                                                            <td>{{sarData.ReportedPersonDetails[i].FirstNames}}</td>
+                                                            <td>{{sarData.ReportedPersonDetails[i].DateOfBirth}}</td>
+                                                            <td>{{sarData.ReportedPersonDetails[i].IDNumber}}</td>
+                                                            <td>
+                                                                <button class='btn btn-primary' (click)='onRefDetailsEdit(TbdRefDetail, refDetails)'>Edit</button>
+                                                            </td>
+                                                            <td>
+                                                                <button class='btn btn-danger' (click)='onRefDetailsRemove(TbdRefDetail)'>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingFive">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                            Residential Business Address
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                    <div class="panel-body divScroll">
+                                        <form #resBus="ngForm">
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Unit Number:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="unitNum" type="text" [ngModel]="residentialBusinessData.UnitNumber" name="UnitNumber" #unitNumber="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Complex (If applicable):</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="complex" type="text" [ngModel]="residentialBusinessData.Complex" name="Complex" #complex="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Street Number:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="complex" type="text" [ngModel]="residentialBusinessData.StreetNumber" name="Complex" #streetNumber="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Street/Name of Farm:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="streetName" type="number" [ngModel]="residentialBusinessData.StreetName" name="StreetName" #SsreetName="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Suburb/District:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="suburbDistrict" type="number" [ngModel]="residentialBusinessData.SuburbDistrict" name="SuburbDistrict" #suburbDistrict="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">City/Town:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="cityTown" type="number" [ngModel]="residentialBusinessData.CityTown" name="CityTown" #cityTown="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Country Code (e.g. SA=ZAF):</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="countryCode1" type="number" [ngModel]="residentialBusinessData.CountryCode" name="CountryCode" #countryCode="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Province:</label>
+                                                <div class="col-sm-2">
+                                                    <input class="form-control" id="province" type="number" [ngModel]="residentialBusinessData.ProvinceId" name="ProvinceId" #provinceId="ngModel" />
+                                                    <select class="form-control" [(ngModel)]="residentialBusinessData.ProvinceId" name="ProvinceId" #provinceId="ngModel">
+                                                        <option></option>
+                                                        <option *ngFor="let provinces of provincesList" [value]="provinces.ProvinceId">{{provinces.Description}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="col-sm-10">
+                                            <button class='btn btn-primary' style="float: right!important" (click)="doneResBusinessAddressEdit(residentialBusinessData,resBus)">Done Edit</button>
+                                            <button class='btn btn-primary' style="float: right!important" (click)="addResBusinessAddress(resBus)">Add Business Details</button>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-2">Filter Data by:</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="companTtraderImporterExporters" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-10">
+                                            <div class='table-responsive'>
+                                                <table class='table'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Unit Number:</th>
+                                                            <th>City/Town:</th>
+                                                            <th>Country Code (e.g. SA=ZAF):</th>
+                                                            <th>Province:</th>
+                                                            <th>Edit:</th>
+                                                            <th>Delete:</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let resItem of resItems;let i = index">
+                                                            <td>{{i}}</td>
+                                                            <td>{{resItems[i]?.UnitNumber}}</td>
+                                                            <td>{{resItems[i]?.CityTown}}</td>
+                                                            <td>{{resItems[i]?.CountryCode}}</td>
+                                                            <td>{{resItems[i]?.Province}}</td>
+                                                            <td>
+                                                                <button class='btn btn-primary' (click)='resBusinessAddressEdit(resItem, resBus , 1)'>Edit</button>
+                                                            </td>
+                                                            <td>
+                                                                <button class='btn btn-danger' (click)='onRefDetailsRemove(resItem)'>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <label style="margin-top:10px">Page {{resCurrentIndex}}/{{resPageNumber}}</label>
+                                                </div>
+                                                <div class="btn-group pull-right">
+                                                    <ul class="pagination">
+                                                        <li [ngClass]="{'disabled': (resCurrentIndex == 1 || resPageNumber == 0)}">
+                                                            <a (click)="prevPageResBus()">Prev</a>
+                                                        </li>
+                                                        <li *ngFor="let page of resPagesIndex" [ngClass]="{'active': (resCurrentIndex == page)}">
+                                                            <a (click)="setPageResBus(page)">{{page}}</a>
+                                                        </li>
+                                                        <li [ngClass]="{'disabled': (resCurrentIndex == resPageNumber || resPageNumber == 0)}">
+                                                            <a (click)="nextPageResBus()">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingSix">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                            Non Compliance Details
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                                    <div class="panel-body divScroll">
+                                        <form novalidate #nonCompliance="ngForm">
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-4">Time frame:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" [(ngModel)]="nonComplianceData.TimeFrameId" name="TimeFrameId" #timeFrameId="ngModel">
+                                                        <option></option>
+                                                        <option *ngFor="let timeFrame of timeFrameList" [value]="timeFrame.TimeFrameId">{{timeFrame.Description}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-label col-sm-12">
+                                                <label class="control-label col-sm-4">Yearly Loss:</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" [(ngModel)]="nonComplianceData.YearlyLossId" name="YearlyLossId" #yearlyLossId="ngModel">
+                                                        <option></option>
+                                                        <option *ngFor="let yearlyLoss of yearlyLossList" [value]="yearlyLoss.YearlyLossId">{{yearlyLoss.Description}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-4">Describe the incident i.e. what is occurring:</label>
+                                                <div class="col-sm-8">
+                                                    <!-- <input class="form-control" id="incidentOccurring" type="text" [(ngModel)]="nonComplianceData.DescribeNonCompliance" name="DescribeNonCompliance"
+                                                #describeNonCompliance="ngModel" /> -->
+                                                    <textarea class="form-control" rows="2" cols="82" id="incidentOccurring" [ngModel]="nonComplianceData.DescribeNonCompliance" name="DescribeNonCompliance" #describeNonCompliance="ngModel"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-4">Describe where the incident is happening i.e all the locations where non
+                                                    compliance is occuring (can be more than one address where non compliance
+                                                    is taking place):</label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control" rows="4" cols="82" id="describeIncident" [ngModel]="nonComplianceData.NonComplianceLocation" name="NonComplianceLocation" #nonComplianceLocation="ngModel"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-4">Describe where the non compliance occurs/ is said to occur:</label>
+                                                <div class="col-sm-8">
+                                                    <!-- <input class="form-control" id="describeCompliance" type="text" [(ngModel)]="nonComplianceData.NonComplianceOccurance" name="NonComplianceOccurance"
+                                                #nonComplianceOccurance="ngModel" /> -->
+                                                    <textarea class="form-control" rows="2" cols="82" id="describeCompliance" [ngModel]="nonComplianceData.NonComplianceOccurance" name="NonComplianceOccurance" #nonComplianceOccurance="ngModel"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-4">Please provide any additional information of relevance:</label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control" rows="2" cols="82" id="additionalInfo" [ngModel]="nonComplianceData.AdditionalInfo" name="AdditionalInfo" #additionalInfo="ngModel"></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="col-sm-10">
+                                            <button class='btn btn-primary' style="float: right!important" (click)="onDoneEditnonCompliancenonComplianceDetails(nonComplianceData,nonCompliance)">Done Edit</button>
+                                            <button class='btn btn-primary' style="float: right!important" (click)="addNonComplianceDetails(nonCompliance)">Add Compliance Details</button>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-2">Filter Data by:</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" id="companTtraderImporterExporters" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-10">
+                                            <div class='table-responsive'>
+                                                <table class='table'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <!-- <th>Time frame:</th>
+                                                    <th>Yearly Loss:</th> -->
+                                                            <th>Describe the incident:</th>
+                                                            <!-- <th>VAT:</th> -->
+                                                            <th>Edit</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let nonComItem of nonComItems;let i = index">
+                                                            <td>{{i}}</td>
+                                                            <td>{{nonComItems[i]?.DescribeNonCompliance}}</td>
+                                                            <!-- <td>{{nonComItem[i].Yearly Loss}}</td>
+                                                    <td>{{nonComItem[i].IncomeTax}}</td>
+                                                    <td>{{nonComItem[i].VAT}}</td> -->
+                                                            <td>
+                                                                <button class='btn btn-primary' (click)='onNonComplianceDataEdit(nonComItem, nonCompliance , i)'>Edit</button>
+                                                            </td>
+                                                            <td>
+                                                                <button class='btn btn-danger' (click)='onNonComplianceDataRemove(NonComplianceDetail)'>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <label style="margin-top:10px">Page {{nonComCurrentIndex}}/{{nonComPageNumber}}</label>
+                                                </div>
+                                                <div class="btn-group pull-right">
+                                                    <ul class="pagination">
+                                                        <li [ngClass]="{'disabled': (nonComCurrentIndex == 1 || nonComPageNumber == 0)}">
+                                                            <a (click)="prevPageNonCom()">Prev</a>
+                                                        </li>
+                                                        <li *ngFor="let page of nonComPagesIndex" [ngClass]="{'active': (nonComCurrentIndex == page)}">
+                                                            <a (click)="setPageNonCom(page)">{{page}}</a>
+                                                        </li>
+                                                        <li [ngClass]="{'disabled': (nonComCurrentIndex == nonComPageNumber || nonComPageNumber == 0)}">
+                                                            <a (click)="nextPageNonCom()">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTen">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                            Person Reporting Details
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
+                                    <div class="panel-body divScroll">
+
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-6">Did you wish to disclose your personal details:</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" id="disclosePersonalDetails" [(ngModel)]="sarData.PersonReportingDetails.IsPersonalInfoDisclosed" name="IsPersonalInfoDisclosed" #isPersonalInfoDisclosed="ngModel">
+                                                    <option></option>
+                                                    <option value=true>Yes</option>
+                                                    <option value=false>No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label col-sm-6">Are you willing to provide an affidavit in respect of this non compliant being
+                                                reported:</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" id="provideAffidafit" [(ngModel)]="sarData.PersonReportingDetails.IsAffidavitProvided" name="IsAffidavitProvided" #isAffidavitProvided="ngModel">
+                                                    <option></option>
+                                                    <option value=true>Yes</option>
+                                                    <option value=false>No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isPersonalInfoDisclosed.value=='true'">
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Surname:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="surname1" type="text" [(ngModel)]="sarData.PersonReportingDetails.Surname" name="Surname" #surname="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Initials :</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="initials1" type="text" [(ngModel)]="sarData.PersonReportingDetails.Initials" name="Initials" #initials="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">First Two Names :</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="firstTwoNames" type="text" [(ngModel)]="sarData.PersonReportingDetails.FirstNames" name="FirstNames" #firstNames="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Home Tel Numbers:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="homenumber" type="text" [(ngModel)]="sarData.PersonReportingDetails.HomeNumber" name="HomeNumber" #homeNumber="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Business Tel Numbers:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="busTelNumbers" type="text" [(ngModel)]="sarData.PersonReportingDetails.BusinessNumber" name="BusinessNumber" #businessNumber="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Fax number :</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="faxnumber" type="text" [(ngModel)]="sarData.PersonReportingDetails.FaxNumber" name="FaxNumber" #faxNumber="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Cell Number :</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="callNumber" type="text" [(ngModel)]="sarData.PersonReportingDetails.CellNumber" name="CellNumber" #cellNumber="ngModel" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Contact Email:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" id="contactEmail" type="text" [(ngModel)]="sarData.PersonReportingDetails.EmailAddress" name="EmailAddress" #emailAddress="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Licensing and registration:</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" id="licensingReg" [(ngModel)]="sarData.PersonReportingDetails.LicensingAndRegistration" name="LicensingAndRegistration" #licensingAndRegistration="ngModel">
+                                                        <option value=""></option>
+                                                        <option value="true">Yes</option>
+                                                        <option value="false">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Submission:</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" id="submission" [(ngModel)]="sarData.PersonReportingDetails.Submission" name="Submission" #submission="ngModel">
+                                                        <option value=""></option>
+                                                        <option value="true">Yes</option>
+                                                        <option value="false">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Declaration</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" id="declaration" [(ngModel)]="sarData.PersonReportingDetails.Declaration" name="Declaration" #declaration="ngModel">
+                                                        <option value=""></option>
+                                                        <option value="true">Yes</option>
+                                                        <option value="false">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Payment:</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" id="payment" [(ngModel)]="sarData.PersonReportingDetails.Payments" name="Payments" #payments="ngModel">
+                                                        <option value=""></option>
+                                                        <option value="true">Yes</option>
+                                                        <option value="false">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Illegal Activities:</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" id="illegalActivities" [(ngModel)]="sarData.PersonReportingDetails.IllegalActivities" name="IllegalActivities" #illegalActivities="ngModel">
+                                                        <option value=""></option>
+                                                        <option value="true">Yes</option>
+                                                        <option value="false">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label class="control-label col-sm-3">Other:</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" id="other1" [(ngModel)]="sarData.PersonReportingDetails.Other" name="Other" #other="ngModel">
+                                                        <option value=""></option>
+                                                        <option value=true>Yes</option>
+                                                        <option value=false>No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="userRole=='Superuser'">
+                    <button class='btn btn-primary' (click)="onSave(sarData)" [disabled]="!sarform.valid">Save</button>
+                    <button class='btn btn-primary' [disabled]="!sarform.valid" (click)=submitSar(sarData)>Submit</button>
+                    <button class='btn btn-primary' (click)="onCancel()">Cancel</button>
+                </div>
+
+                <div *ngIf="userRole=='Superuse'">
+                    <button class='btn btn-primary'>Accept</button>
+                    <button class='btn btn-primary'>Discard</button>
+                    <button class='btn btn-primary'>Close</button>
+                    <button class='btn btn-primary'>Cancel</button>
+                </div>
+
+                <div *ngIf="userRole=='Superuse'">
+                    <button class='btn btn-primary'>Agree</button>
+                    <button class='btn btn-primary'>Disagree</button>
+                    <button class='btn btn-primary'>Cancel</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- </div> -->
+        <!-- </div> -->
+    </div>
+
+    <div class="col-md-4 col-lg-4">
+        <div class="row" style="margin-top:30px;">
+            <div class="panelprimary">
+                <div class="panelheader">
+                    Select Documents
+                </div>
+                <div class="panelcontainerhalf" style="overflow: hidden !important;">
+                    <app-document-upload></app-document-upload>
+                </div>
+                <div class="panelheader">
+                    View Comments
+                </div>
+                <div class="panelcontainerhalf" style="overflow: hidden !important;">
+                    <app-comments-view id="commentsview"></app-comments-view>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

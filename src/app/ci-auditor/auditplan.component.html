@@ -1,0 +1,249 @@
+<div class="panel">
+  <div class=" panel-primary" style="width:80vw">
+    <h2 class="panel-heading">Complete Audit Plan Template</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+      <div class="row">
+        <div class="panelprimary" style="margin-left:15px">
+          <div class="panelheader">
+            Audit Plan details
+          </div>
+          <div class="panelcontainer">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+                      style="color:white">
+                      Audit Plan Template
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    <form #auditTem="ngForm">
+
+                    </form>
+                    <h3 style="text-align:center; font-weight:bold">Section 1</h3>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Case Status:</label>
+                      <div class="col-sm-7">
+                        <label class="form-control col-sm-2">New</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Risk Assessment Report:</label>
+                      <div class="col-sm-7">
+                        <select class="form-control" required name="RiskAssementReport" [(ngModel)]="audiDetails.RiskAssementReport">
+                          <option [ngValue]="null"></option>
+                          <option *ngFor="let t of toggleCollection" [ngValue]="t.Value">{{t.DisplayText}}</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">VD/DL:</label>
+                      <div class="col-sm-7">
+                        <select class="form-control" required name="VDDLQuestionId" [(ngModel)]="audiDetails.VDDLQuestionId">
+                          <option [ngValue]="null"></option>
+                          <option *ngFor="let t of vDLookup" [ngValue]="t.VDDLQuestionId" [attr.selected]="audiDetails.VDDLQuestionId == t.VDDLQuestionId ? true : null ">{{t.Description}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <button class="btn btn-primary btn-sm" (click)="viewVddl()">View</button>
+                      </div>
+
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Audit Required:</label>
+                      <div class="col-sm-7">
+                        <select class="form-control" required name="AuditRequiredId" [(ngModel)]="audiDetails.AuditRequiredId">
+                          <option [ngValue]="null"></option>
+                          <option *ngFor="let t of auditRequiredLookup" [ngValue]="t.AuditRequiredId" [attr.selected]="audiDetails.AuditRequiredId == t.AuditRequiredId ? true : null ">{{t.Description}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <br/>
+                    <h3 style="text-align:center; font-weight:bold">Section 2</h3>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Type Of Audit:</label>
+                      <div class="col-sm-7">
+                        <select class="form-control" required name="TypeOfAuditId" [(ngModel)]="audiDetails.TypeOfAuditId">
+                          <option [ngValue]="null"></option>
+                          <option *ngFor="let t of typeOfAuditLook" [ngValue]="t.TypeOfAuditId" [attr.selected]="audiDetails.TypeOfAuditId == t.TypeOfAuditId ? true : null ">{{t.Description}}</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Start Date:</label>
+                      <div class="col-sm-7">
+                        <div>
+                          <input class="form-control" required type="date" [(ngModel)]="audiDetails.StartDate" name="Other" #other="ngModel" />
+                          <!-- <span class="glyphicon glyphicon-calendar"></span> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Audit Scope:</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" required type="text" [(ngModel)]="audiDetails.AuditScope" name="Other" #other="ngModel" />
+                      </div>
+
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Audit Objectives:</label>
+                      <div class="col-sm-7">
+                        <textarea class="form-control" required maxlength="2000" type="text" required [(ngModel)]="audiDetails.AuditObjectives" name="AuditObjectives"
+                          #auditObjectives="ngModel">
+              </textarea>
+                      </div>
+
+                    </div>
+
+                    <h3 style="text-align:center; font-weight:bold">Section 3</h3>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Was the Trader previously audited?:</label>
+                      <div class="col-sm-7">
+                        <select class="form-control" required name="IsTraderPreviouslyAudited" [(ngModel)]="audiDetails.IsTraderPreviouslyAudited">
+                          <option [ngValue]="null"></option>
+                          <option *ngFor="let t of toggleCollection" [ngValue]="t.Value">{{t.DisplayText}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Is there an existing audit or investigation?:</label>
+                      <div class="col-sm-7">
+
+                        <select class="form-control" required name="IsExistingAuditOrInvestigation" [(ngModel)]="audiDetails.IsExistingAuditOrInvestigation">
+                          <option [ngValue]="null"></option>
+                          <option *ngFor="let t of toggleCollection" [ngValue]="t.Value">{{t.DisplayText}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                      <label class="control-label col-sm-4">Is the trader a new importer/exporter?:</label>
+                      <div class="col-sm-7">
+
+                        <select class="form-control" required name="IsThereAnExistingAudit" [(ngModel)]="audiDetails.IsTraderNewExporterImporter">
+                          <option [ngValue]="null"></option>
+                          <option *ngFor="let t of toggleCollection" [ngValue]="t.Value">{{t.DisplayText}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                      style="color:white" aria-controls="collapseTwo">
+                      Check List
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="panel-body">
+                    <div class="row" *ngFor="let auditlistItem of auditlistItems; let i = index">
+                      <div class="form-group col-sm-12 ">
+                        <label class=" col-sm-8 control-label">{{auditlistItem.Description}}</label>
+                        <div class="col-sm-3">
+
+                          <select class="form-control" required name="selectedQuestion" [(ngModel)]="auditlistItem.Answer">
+                            <option [ngValue]="null"></option>
+                            <option *ngFor="let t of toggleCollection" [ngValue]="t.DisplayText">{{t.DisplayText}}</option>
+                          </select>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row buttoncontainer" style="margin-left: -9px; width: 96.6%;">
+              <div class="col-md-12 col-lg-12" style="text-align:center">
+                <!-- <button click class='btn btn-primary' (click)="saveCompetedAuditPlanQuestions()">Complete Checklist</button> -->
+                <button class='btn btn-primary' (click)="saveCompleteAuditPlanAllInOne()">Save Audit Plan</button>
+                <button class='btn btn-primary' (click)="getDocumentGenerationLetter()">Generate Notification of Audit Letter</button>
+                <button class='btn btn-primary' (click)="submitAuditPlan()">Send for Approval</button>
+                <button class='btn btn-primary' (click)="onCancel()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6 col-lg-6">
+      <div class="row">
+        <div class="panelprimary">
+          <div class="panelheader">
+            Generated Letters
+          </div>
+          <div class="panelcontainer" style="overflow: hidden !important;">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <div>
+                  <!-- <input type="file" id="fileloader" multiple="multiple" (change)="uploadFile($event)" /> -->
+                  <br/>
+                </div>
+                <p>Number Of Letters: {{documentItems?.length ==null?0:documentItems?.length }}</p>
+
+                <div class="listBorder">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                      <label class="boldtext">Name</label>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                      <label class="boldtext">Size</label>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                      <label class="boldtext">Remove</label>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                      <label class="boldtext">View Doc</label>
+                    </div>
+                  </div>
+                  <div *ngFor="let documentItem of documentItems; let i = index" class="row tableoutline">
+                    <div class="col-lg-6 col-md-6">
+                      <div class="tablebox">
+                        <strong>{{documentItem.FileName}}</strong>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                      <div class="tablebox">
+                        {{documentItem.FileSize/1024/1024 | number:'.2' }} MB
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                      <div class="tablebox">
+                        <button type="button" class="btn btn-danger btn-xs" (click)="removeDocument(i)">
+                          <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                      <div class="tablebox">
+                        <button type="button" id="ViewButton" class="btn btn-primary btn-xs" (click)="viewDocument(i)">
+                          <span class="glyphicon glyphicon-file"></span> View
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

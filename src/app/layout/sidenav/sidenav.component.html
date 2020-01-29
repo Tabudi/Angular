@@ -1,0 +1,98 @@
+<div class="nav-side-menu">
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <!--<li><a [routerLink]="['/dashboard']"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a></li>
+            <li><a [routerLink]="['/createvddl']"><i class="fa fa-user fa-lg"></i> Create VD/DL</a></li>
+            <li><a [routerLink]="['/vddlworkinprogress']"><i class="fa fa-user fa-lg"></i> Work in Progress</a></li>
+            <li><a [routerLink]="['/createsar']"><i class="fa fa-user fa-lg"></i> Create SAR</a></li>
+            <li><a [routerLink]="['/sarworkinprogress']"><i class="fa fa-user fa-lg"></i> Work in Progress</a></li>
+
+            <li><a [routerLink]="['/createcrcs']"><i class="fa fa-user fa-lg"></i> Create CRCS</a></li>
+            <li><a [routerLink]="['/crcrcsworkinprogresscs']"><i class="fa fa-user fa-lg"></i> Work in Progress</a></li>
+
+            <div></div>-->
+            <li *ngIf="userRole=='Superuser' || userRole=='Client Interface Department'"><a [routerLink]="['/dashboard']"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a></li>
+            <li *ngIf="userRole=='Superuser'" data-toggle="collapse" data-target="#vddl" class="collapsed active">
+                <a><i class="fa fa-desktop fa-lg"></i> VDDL <span class="arrow"></span></a>
+            </li>
+            <ul *ngIf="userRole=='Superuser' || userRole=='Client Interface Department'" class="sub-menu collapse" id="vddl">
+                <li><a [routerLink]="['/createvddl']"><i class="fa fa-edit fa-lg"></i> Create VD/DL</a></li>
+                <li><a [routerLink]="['/vddlworkinprogress']"><i class="fa fa-list-alt fa-lg"></i> Work in Progress</a></li>
+            </ul>
+
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/createsar']"><i class="fa fa-user fa-lg"></i> Create SAR</a></li>
+            <!-- <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/createcrcs']"><i class="fa fa-user fa-lg"></i> RA Approval</a></li> -->
+
+            <li *ngIf="userRole=='Superuser'" data-toggle="collapse" data-target="#ra" class="collapsed active">
+                <a><i class="fa fa-desktop fa-lg"></i> RA Report <span class="arrow"></span></a>
+            </li>
+            <ul *ngIf="userRole=='Superuser' || userRole=='Client Interface Department'" class="sub-menu collapse" id="ra">
+                <li><a [routerLink]="['/createcrcs']"><i class="fa fa-edit fa-lg"></i> Create RA</a></li>
+                <li><a [routerLink]="['/crcrcsworkinprogresscs']"><i class="fa fa-list-alt fa-lg"></i> Work in Progress</a></li>
+                <li><a [routerLink]="['/raaproval']"><i class="fa fa-list-alt fa-lg"></i> RA Approval</a></li>
+            </ul>
+            <!-- <li data-toggle="collapse" data-target="#vddl" class="collapsed"> carworkinprogress
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/sarworkinprogress']" ><i class="fa fa-user fa-lg"></i> Work in Progress</a></li>
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/cimanagerAllocate']" ><i class="fa fa-user fa-lg"></i> Allocate</a></li>
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/cimanagerReallocate']" ><i class="fa fa-user fa-lg"></i> Re Allocate</a></li>
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/admin']" ><i class="fa fa-user fa-lg"></i> Admin</a></li>
+            <!--  CI Auditor <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/createauditplan']" ><i class="fa fa-user fa-lg"></i>Audit plan CI</a></li>
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/completeAuditplanManager']" ><i class="fa fa-user fa-lg"></i>Audit plan CI-Ops Manager</a></li> -->
+            <li *ngIf="userRole=='Superuser' || serRole=='CI Auditor' " data-toggle="collapse" data-target="#auditPlan" class="collapsed active">
+                <a><i class="fa fa-desktop fa-lg"></i> Audit Plan Template <span class="arrow"></span></a>
+            </li>
+            <ul *ngIf="userRole=='Superuser' || serRole=='CI Auditor'" class="sub-menu collapse" id="auditPlan">
+                <li><a [routerLink]="['/auditplanworkinprogress']"><i class="fa fa-list-alt fa-lg"></i>Audit in Progress</a></li>
+                <li><a [routerLink]="['/auditallocation']"><i class="fa fa-list-alt fa-lg"></i>Allocated Cases</a></li>
+                <li><a [routerLink]="['/auditapproved']"><i class="fa fa-list-alt fa-lg"></i>Approved Audits Plans</a></li>
+                <li><a [routerLink]="['/findingsrework']"><i class="fa fa-list-alt fa-lg"></i>Audit Findings - Rework </a></li>
+                <li><a [routerLink]="['/findingsrejected']"><i class="fa fa-list-alt fa-lg"></i>Audit Findings - Rejected </a></li>
+                <li><a [routerLink]="['/findingsletters']"><i class="fa fa-list-alt fa-lg"></i>Approved Findings - Generate Letters </a></li>
+                <li><a [routerLink]="['/findingsApproved']"><i class="fa fa-list-alt fa-lg"></i>Approved Findings - Finalize </a></li>
+                <li><a [routerLink]="['/findingsclosed']"><i class="fa fa-list-alt fa-lg"></i>Audit Findings - Finalized</a></li>
+
+            </ul>
+
+            <!-- <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/auditplanworkinprogress']"><i class="fa fa-edit fa-lg"></i>Auidt Plans</a></li> -->
+
+
+            <!-- <li data-toggle="collapse" data-target="#vddl" class="collapsed"> carworkinprogress
+      <div class="menu-list">
+          <ul id="menu-content" class="menu-content collapse out">
+              <li><a [routerLink]="['/dashboard']"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a></li>
+              <li><a [routerLink]="['/createvddl']" ><i class="fa fa-user fa-lg"></i> Create VD/DL</a></li>
+              <li><a [routerLink]="['/vddlworkinprogress']" ><i class="fa fa-user fa-lg"></i> Work in Progress</a></li>
+              <li><a [routerLink]="['/createauditplan']" ><i class="fa fa-user fa-lg"></i> Audit Plan</a></li>
+                <li data-toggle="collapse" data-target="#vddl" class="collapsed">
+                <a><i class="fa fa-globe fa-lg"></i> VD/DL <span class="arrow"></span></a>
+              </li>  
+              <ul class="sub-menu collapse" id="vddl">
+                <li><a [routerLink]="['/createvddl']" ><i class="fa fa-user fa-lg"></i> Create VD/DL</a></li>
+                <li><a ><i class="fa fa-user fa-lg"></i> Work in Progress</a></li>
+              </ul> 
+
+            <li><a [routerLink]="['/createuser']"><i class="fa fa-users fa-lg"></i> Users</a></li>
+            <li><a><i class="fa fa-users fa-lg"></i> CRSCS Ops Specialist</a></li>-->
+            <!-- <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/sarworkinprogress']"><i class="fa fa-user fa-lg"></i> Work in Progress</a></li>
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/createcrcs']"><i class="fa fa-user fa-lg"></i> Create CRCS</a></li>
+            <li  CI Auditor Manager *ngIf="userRole=='Superuser'"><a [routerLink]="['/crcrcsworkinprogresscs']"><i class="fa fa-user fa-lg"></i> Work in Progress</a></li> -->
+            <li *ngIf="userRole=='Superuser' || userRole=='CI Auditor Manager'" data-toggle="collapse" data-target="#vddlcomplexity" class="collapsed active">
+                <a><i class="fa fa-desktop fa-lg"></i> Transactional/Demand Led Complexity <span class="arrow"></span></a>
+            </li>
+            <ul *ngIf="userRole=='Superuser' || userRole=='CI Auditor Manager'" class="sub-menu collapse" id="vddlcomplexity">
+                <li><a [routerLink]="['/cimanagerAllocate']"><i class="fa fa-list-alt fa-lg"></i> Allocate</a></li>
+                <li><a [routerLink]="['/cimanagerReallocate']"><i class="fa fa-list-alt fa-lg"></i> Re Allocate</a></li>
+                <li><a [routerLink]="['/cimanagerAuditApproval']"><i class="fa fa-list-alt fa-lg"></i>Audit Plan Approval</a></li>
+                <li><a [routerLink]="['/findingsApproval']"><i class="fa fa-list-alt fa-lg"></i>Audit Findings Approval </a></li>
+                <li><a [routerLink]="['/findingsApprveletters']"><i class="fa fa-list-alt fa-lg"></i>Audit Findings Approval - Letters </a></li>
+            </ul>
+
+            <!-- <li *ngIf="userRole=='Super'"><a [routerLink]="['/admin']"><i class="fa fa-user fa-lg"></i> Admin</a></li> -->
+            <!-- <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/search']"><i class="fa fa-search fa-lg"></i> Search</a></li> -->
+            <li *ngIf="userRole=='Superuser'"><a [routerLink]="['/admin']"><i class="fa fa-users fa-lg"></i> Admin</a></li>
+            <li *ngIf="userRole=='Superuser' || userRole=='CI Auditor Manager'"><a [routerLink]="['/search']"><i class="fa fa-search fa-lg"></i> Search</a></li>
+        </ul>
+    </div>
+</div>

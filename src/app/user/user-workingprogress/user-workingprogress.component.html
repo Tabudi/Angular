@@ -1,0 +1,57 @@
+<div class="panel">
+    <div class='panel-primary'>
+        <h2 class="panel-heading">Work In Progress</h2>
+        <div class='panel-body'>
+            <div class='row'>
+                <div class='col-md-2'>Filter by:</div>
+                <div class='col-md-4'>
+                    <input type='text' class="form-control" />
+                </div>
+            </div>
+            <div class='row'>
+                <label class='control-label col-md-2'>Get Next To Allocate:</label>
+                <div class='col-md-4'>
+                  <button tooltip="Allocate First" [disabled]="false" class='btn btn-primary'(click)="getNextCaseToAllocate()">Get Next</button>
+                </div>
+              </div>
+            <div class='row'>
+                <div class='col-md-6'>
+                    <h3>Filtered by: {{listFilter}} </h3>
+                </div>
+            </div>
+            <div class='table-responsive'>
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <th>ReferenceNumber:</th>
+                            <th>Status:</th>
+                            <th>Customs/Excise Code:</th>
+                            <th>Company Number:</th>
+                            <th>Income Tax:</th>
+                            <th>VAT Number:</th>
+                            <th>DateCreated:</th>
+                            <th>:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let saretail of filteredsarDetails'>
+                            <td>{{saretail.CaseDetails.ReferenceNumber}}</td>
+                            <td>ACTIVE</td>
+                            <td>{{saretail.TbdRefDetails[0]?.CustomsExciseCode}}</td>
+                            <td>{{saretail.TbdRefDetails[0]?.CompanyNumber}}</td>
+                            <td>{{saretail.TbdRefDetails[0]?.IncomeTax}}</td>
+                            <td>{{saretail.TbdRefDetails[0]?.VAT}}</td>
+                            <td>{{saretail.CaseDetails.DateCreated | date}}</td>
+                            <td>
+                                <button class='btn btn-primary' (click)='onSarEdit(saretail)'></button>
+                            </td>
+                            <td>
+                                <button class='btn btn-primary' (click)='onSarEdit(saretail)'></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

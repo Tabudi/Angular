@@ -1,0 +1,51 @@
+<div class="panel">
+    <div class='panel-primary'>
+        <h2 class="panel-heading">Work In Progress</h2>
+        <div class='panel-body'>
+            <div class='row'>
+                <div class='col-md-2'>Filter by:</div>
+                <div class='col-md-4'>
+                    <input type='text' class="form-control" />
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6'>
+                    <h3>Filtered</h3>
+                </div>
+            </div>
+            <div class='table-responsive'>
+                <table class='table'>
+                    <thead>
+                        <tr>
+
+                            <th>Customs Code:</th>
+                            <th>Registered Name:</th>
+                            <th>Trading Name:</th>
+                            <th>Company registered number:</th>
+                            <th>Trading Name:</th>
+                            <th>Postal Address:</th>
+                            <th>Physical Address:</th>
+                            <th>Email Address:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let radetail of filteredsarDetails'>
+                            <td>{{radetail.RegistrationParticulars.CustomsCode}}</td>
+                            <td>{{radetail.RegistrationParticulars.RegisteredName}}</td>
+                            <td>{{radetail.RegistrationParticulars.TradingName}}</td>
+                            <td>{{radetail.RegistrationParticulars.PostalAddress}}</td>
+                            <td>{{radetail.RegistrationParticulars.PhysicalAddress}}</td>
+                            <td>{{radetail.RegistrationParticulars.EmailAddress}}</td>
+                            <td>{{radetail.RegistrationParticulars.TelNumber}}</td>
+                            <td>{{radetail.RegistrationParticulars.FaxNumber}}</td>
+                            <td>{{radetail.CustomsRASParticulars.Address}}</td>
+                            <td>
+                                <button class='btn btn-primary' (click)='onRAEdit(radetail)'>Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

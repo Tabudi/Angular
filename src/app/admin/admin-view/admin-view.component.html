@@ -1,0 +1,138 @@
+<div class="panel">
+  <div class=" panel-primary">
+    <h2 class="panel-heading">User Management</h2>
+  </div>
+
+  <div class='table-responsive'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>FirstName:</th>
+          <th>LastName:</th>
+          <th>SID:</th>
+          <th>EmailAddress:</th>
+          <th>Role:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let item of items'>
+          <td>{{item.FirstName | uppercase}}</td>
+          <td>{{item.LastName | uppercase}}</td>
+          <td>{{item.SID | uppercase}}</td>
+          <td>{{item.EmailAddress | uppercase}}</td>
+          <td>{{item.Role | uppercase}}</td>
+          <td>
+            <button class='btn btn-primary' (click)='userEdit(item)'>Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+           <!-- pager -->
+           <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+              <div class="btn-group">
+                  <label style="margin-top:10px">Page {{currentIndex}}/{{pageNumber}}</label>
+              </div>
+              <div class="btn-group pull-right">
+                  <ul class="pagination">
+                      <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}">
+                          <a (click)="prevPage()">Prev</a>
+                      </li>
+                      <li *ngFor="let page of pagesIndex" [ngClass]="{'active': (currentIndex == page)}">
+                          <a (click)="setPage(page)">{{page}}</a>
+                      </li>
+                      <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}">
+                          <a (click)="nextPage()">Next</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+  </div>
+  <br/>
+  <div class="container panel">
+      <div class=" panel-primary">
+          <h2 class="panel-heading">Add/Edit User</h2>
+        </div>
+  <form #adminForm="ngForm">
+    <div class="form-group col-sm-12">
+      <label class="control-label col-sm-1">First Name</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" maxlength="20" [(ngModel)]="userAdmin.FirstName" name="FirstName" #firstName="ngModel"
+          required />
+
+        <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+          Please Enter First Name
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-sm-12">
+      <label class="control-label col-sm-1">LastName:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" maxlength="20" [(ngModel)]="userAdmin.LastName" name="LastName" #lastName="ngModel"
+          required />
+
+        <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+          Please Enter Last Name
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group col-sm-12">
+      <label class="control-label col-sm-1">SID:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" maxlength="20" [(ngModel)]="userAdmin.SID" name="SID" #sID="ngModel" required />
+
+        <div [hidden]="sID.valid || sID.pristine" class="alert alert-danger">
+          Please Enter SID
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group col-sm-12">
+      <label class="control-label col-sm-1">Email Address:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" maxlength="100" [(ngModel)]="userAdmin.EmailAddress" name="EmailAddress" #emailAddress="ngModel"
+          required />
+
+        <div [hidden]="emailAddress.valid || emailAddress.pristine" class="alert alert-danger">
+          Please Enter Email Address
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group col-sm-12">
+      <label class="control-label col-sm-1">ManagerSID:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="text" maxlength="20" [(ngModel)]="userAdmin.ManagerSID" name="ManagerSID" #managerSID="ngModel"
+          required />
+
+        <div [hidden]="managerSID.valid || managerSID.pristine" class="alert alert-danger">
+          Please Enter ManagerSID
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group col-sm-10">
+      <label class="control-label col-sm-1">Region:</label>
+      <div class="col-sm-4">
+        <select class="form-control"  required placeholder="Please make a select" [(ngModel)]="userAdmin.RegionId" name="RegionId" #regionId="ngModel">
+          <option></option>
+          <option *ngFor="let regionItem of regionItems" [value]="regionItem.RegionId">{{regionItem.RegionName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-sm-10">
+      <label class="control-label col-sm-1">Role:</label>
+      <div class="col-sm-4">
+        <select class="form-control" required  placeholder="Please make a select" [(ngModel)]="userAdmin.Role" name="Role" #role="ngModel">
+          <option></option>
+          <option *ngFor="let userRoleItem of userRoleItems" [value]="userRoleItem.RoleName">{{userRoleItem.RoleName}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+  <div class=" col-sm-8">
+      <button class='btn btn-primary' (click)="addUser(userAdmin)" [disabled]="!adminForm.valid">Add/Update User</button>
+      <button class='btn btn-primary' (click)="onCancel()">Cancel</button>
+  </div>
+</div>
+</div>
