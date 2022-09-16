@@ -23,7 +23,7 @@
     "@types/jasmine": "^2.5.38",
     "@types/underscore": "^1.8.7",
     "angular-ui-bootstrap": "^2.5.6",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "bootstrap-select": "^1.12.4",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
